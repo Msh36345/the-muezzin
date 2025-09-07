@@ -1,5 +1,5 @@
 import os
-from services.tools.kafka.kafka_producer import publish_message,get_producer_config
+from services.tools.kafka_producer import publish_message,get_producer_config
 from services.process_files.process_files import get_list_with_all_files_metadata
 
 folder_path = os.getenv("FOLDER_PATH", "podcasts")

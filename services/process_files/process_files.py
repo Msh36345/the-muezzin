@@ -30,7 +30,8 @@ def get_json_with_file_metadata(file_path):
         "file_name": file_path.stem,
         "file_type": file_path.suffix[1:],
         "file_size": file_path.stat().st_size,
-        "file_create_time": datetime.fromtimestamp(file_path.stat().st_birthtime).strftime('%Y-%m-%d %H:%M')
+        "file_create_time": datetime.fromtimestamp(file_path.stat().st_birthtime).strftime('%Y-%m-%d %H:%M'),
+        "unique_id" : file_path.stat().st_ino
     }
     return file_metadata
 
@@ -39,10 +40,4 @@ def get_list_with_all_files_metadata(folder_path):
     list_of_files = get_list_of_files_path_from_folder(folder_path)
     all_files_metadata = create_list_with_all_files_metadata(list_of_files)
     return all_files_metadata
-
-
-
-
-
-
 
