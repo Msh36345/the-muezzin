@@ -13,7 +13,8 @@ mapping = {
             "file_path": {"type": "text"},
             "file_name": {"type": "text"},
             "file_type": {"type": "text"},
-            "file_size": {"type": "integer"}
+            "file_size": {"type": "integer"},
+            "file_transcription": {"type": "text"}
            }
        }
     }
