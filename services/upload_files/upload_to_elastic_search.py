@@ -1,5 +1,8 @@
-from services.tools.elastic_search import es_instance as es,INDEX_NAME
+import os
+from services.tools.elastic_search import es_instance as es
 from services.tools.my_logger import logger
+
+INDEX_NAME = os.environ.get("INDEX_NAME", "the_muezzin")
 
 
 mapping = {

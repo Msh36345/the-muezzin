@@ -5,7 +5,6 @@ from services.tools.my_logger import logger
 
 
 ES_HOST = os.environ.get("ES_HOST", "http://localhost:9200/")
-INDEX_NAME = os.environ.get("INDEX_NAME", "the_muezzin")
 
 # This class talks to Elasticsearch
 class ElasticDAL:

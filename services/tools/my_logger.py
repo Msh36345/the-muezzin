@@ -1,14 +1,16 @@
 import os
 from loguru import logger
+from services.tools.elastic_search import es_instance as es
 import sys
+
+INDEX_LOGGER_NAME = os.environ.get("INDEX_LOGGER_NAME", "the_muezzin")
 
 def init_logger(
     level: str = "INFO",
     show_date: bool = True,
     show_line: bool = True,
     colorize: bool = True,
-    write_to_file: bool = False,
-    log_file_path: str = "app.log"
+    write_to_elastic_search: bool = True,
 ):
     """
     Returns a configured logger based on the given settings.
@@ -36,19 +38,22 @@ def init_logger(
 
     logger.add(sys.stdout, level=level, format=fmt, colorize=colorize)
 
-    if write_to_file:
-        logger.add(
-            log_file_path,
-            level=level,
-            format=fmt,
-            colorize=False,
-            rotation="10 MB",
-            retention="14 days",
-            compression="zip",
-            enqueue=True,
+    if write_to_elastic_search:
+        try:
+            es.index(index=INDEX_LOGGER_NAME, document={
+                "timestamp": datetime.utcnow().isoformat(),
+                "level": record.levelname,
+                "logger": record.name,
+                "message": record.getMessage()
+
+            })
+        except Exception as e:
+            print(f"ES log failed: {e}")
+
         )
 
     return logger
+
 
 LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG")
 
