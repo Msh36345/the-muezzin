@@ -2,10 +2,12 @@ import os
 from pymongo import MongoClient
 import datetime
 from time import sleep
+from services.tools.my_logger import logger
 
-mongo_db = os.environ.get("MONGO_DB", "mongodb://mongodb:27017/")
 
-client = MongoClient(mongo_db)
+MONGO_DB = os.environ.get("MONGO_DB", "mongodb://mongodb:27017/")
+
+client = MongoClient(MONGO_DB)
 db = client["news"]
 collection = db["interesting"]
 
@@ -15,9 +17,9 @@ def insert_list_to_db(news_list):
     for news_item in news_list:
         timestamp = datetime.datetime.now().isoformat()
         collection.insert_one({"time_stemp": timestamp, "news_item": news_item})
-        print("news item insert to mongo DB")
+        logger.info("news item insert to mongo DB")
         sleep(0.5)
-    print("upload interesting news to mongoDB complete")
+    logger.info("upload interesting news to mongoDB complete")
 
 # This gets all news from MongoDB.
 def get_messages_from_mongo_db():

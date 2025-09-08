@@ -1,8 +1,11 @@
 import os
 import time
 from elasticsearch import  Elasticsearch
+from services.tools.my_logger import logger
 
-ES_HOST = os.environ.get("ES_HOST", "http://elasticsearch:9200/")
+
+ES_HOST = os.environ.get("ES_HOST", "http://localhost:9200/")
+INDEX_NAME = os.environ.get("INDEX_NAME", "the_muezzin")
 
 # This class talks to Elasticsearch
 class ElasticDAL:
@@ -14,9 +17,9 @@ class ElasticDAL:
     # This waits until Elasticsearch is ready
     def _wait_until_ready(self):
         while not self.es.ping():
-            print("Waiting for Elasticsearch...")
+            logger.info("Waiting for Elasticsearch...")
             time.sleep(1)
-        print("---Elasticsearch is up!---\n")
+        logger.info("---Elasticsearch is up!---\n")
 
     def get_client(self):
         return self.es
