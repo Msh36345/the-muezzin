@@ -1,6 +1,7 @@
 from services.tools.elastic_search import es_instance as es,INDEX_NAME
 from services.tools.my_logger import logger
 
+
 mapping = {
     "mappings": {
         "properties": {
@@ -29,7 +30,6 @@ def load_data_to_elastic(list_white_files_metadata):
     for file_metadata in list_white_files_metadata:
         es.index(index=INDEX_NAME, document=file_metadata)
         inserted += 1
-        if inserted%10==0:
-            logger.info(f"Inserted {inserted} documents")
-    logger.info(f"---Inserted {inserted} documents----\n")
+        logger.debug(f"Inserted {file_metadata['file_name']} to ElasticSearch")
+    logger.info(f"---Inserted {inserted} documents to ElasticSearch----\n")
     es.indices.refresh(index=INDEX_NAME)
