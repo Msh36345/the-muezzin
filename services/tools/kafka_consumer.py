@@ -23,6 +23,3 @@ def consumer_with_auto_commit(topic):
     logger.info(f"List contents {len(message_value)} files.")
     logger.debug(message_value)
     return message_value
-
-if __name__ == '__main__':
-    consumer_with_auto_commit("metadata")
