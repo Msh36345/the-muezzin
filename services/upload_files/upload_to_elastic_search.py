@@ -14,8 +14,11 @@ mapping = {
             "file_name": {"type": "text"},
             "file_type": {"type": "text"},
             "file_size": {"type": "integer"},
-            "transcription": {"type": "text"}
-           }
+            "transcription": {"type": "text"},
+            "bds_percent": {"type": "integer"},
+            "is_bds": {"type": "boolean"},
+            "bds_threat_level": {"type": "keyword"}
+        }
        }
     }
 

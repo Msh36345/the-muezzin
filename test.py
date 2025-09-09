@@ -20,7 +20,30 @@
 #     print(f"error : {e}")
 import os
 
-a = ["a","b","c","d"]
-if "a" in a:
-    print("111")
+from typing import Iterator
+
+def memory_efficient_word_generator(text_file: str) -> Iterator[str]:
+    word = ''
+    with open(text_file) as text:
+        while True:
+            character = text.read(1)
+            if not character:
+                return
+            if character.isspace():
+                yield word.lower()
+                word = ''
+            else:
+                word += character
+
+
+def pair_generator(text_file):
+    previous_word = ''
+    for word in memory_efficient_word_generator(text_file):
+        if previous_word and word:
+            yield f'{previous_word}-{word}'
+        previous_word = word or previous_word
+
+
+for pair in pair_generator('filename.txt'):
+    print(pair)
 
