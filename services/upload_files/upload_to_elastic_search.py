@@ -14,7 +14,7 @@ mapping = {
             "file_name": {"type": "text"},
             "file_type": {"type": "text"},
             "file_size": {"type": "integer"},
-            "file_transcription": {"type": "text"}
+            "transcription": {"type": "text"}
            }
        }
     }

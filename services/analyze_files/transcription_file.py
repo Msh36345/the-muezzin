@@ -12,6 +12,9 @@ def get_file_transcription(file_path_to_get_file_transcription):
             text = r.recognize_google(audio)
             logger.debug(f"transcription : {text}")
         return text
+    except ValueError as e:
+        logger.error(f"file transcription error : {e}")
+        pass
     except Exception as e:
         logger.error(f"file transcription error : {e}")
     return text
