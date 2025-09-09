@@ -1,7 +1,6 @@
 from pathlib import Path
 from datetime import datetime
 from services.tools.my_logger import logger
-import speech_recognition as sr
 
 # Returns a list of all files in a folder.
 # Gets the folder path from the home path location.
@@ -28,28 +27,15 @@ def create_list_with_all_files_metadata(list_of_files):
 # Accepts a file path and returns a Gson with metadata
 def get_json_with_file_metadata(file_path):
     file_metadata = {
-        "file_path": str(file_path),
+        "unique_id": file_path.stat().st_ino,
         "file_name": file_path.stem,
         "file_type": file_path.suffix[1:],
         "file_size": file_path.stat().st_size,
         "file_create_time": datetime.fromtimestamp(file_path.stat().st_birthtime).strftime('%Y-%m-%d %H:%M'),
-        "unique_id" : file_path.stat().st_ino,
-        "file_transcription":get_file_transcription(file_path)
+        "file_path": str(file_path)
     }
     logger.debug(file_metadata)
     return file_metadata
-
-def get_file_transcription(file_path_to_get_file_transcription):
-    r = sr.Recognizer()
-    try:
-        with sr.AudioFile(file_path_to_get_file_transcription) as source:
-            audio = r.record(source)
-            text = r.recognize_amazon(audio)
-            logger.debug(f"transcription for file {file_path_to_get_file_transcription} :\n{text}")
-        return text
-    except Exception as e:
-        logger.error(f"file transcription error : {e}")
-
 
 def get_list_with_all_files_metadata(folder_path):
     list_of_files = get_list_of_files_path_from_folder(folder_path)
