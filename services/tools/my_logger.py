@@ -7,6 +7,7 @@ import sys
 ES_HOST = os.environ.get("ES_HOST", "http://localhost:9200/")
 INDEX_LOG_NAME = os.environ.get("INDEX_LOG_NAME", "the_muezzin_logs")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG")
+RESET_INDEX = os.getenv("RESET_INDEX",True)
 
 def init_logger(
     level: str = "INFO",
@@ -43,6 +44,10 @@ def init_logger(
 
     if write_to_elastic_search:
         es = Elasticsearch(ES_HOST)
+        if RESET_INDEX:
+            if es.indices.exists(index=INDEX_LOG_NAME):
+                es.indices.delete(index=INDEX_LOG_NAME)
+            es.indices.create(index=INDEX_LOG_NAME)
         def elastic_sink(log_data):
                 record = log_data.record
                 log_json = {

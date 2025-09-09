@@ -18,7 +18,7 @@ def download_file(folder_path,file_name):
     out_data = fs.get(data['_id']).read()
     with open(f"{folder_path}/{file_name}", 'wb') as output:
         output.write(out_data)
-    logger.debug(f"download {file_name} completed.")
+    logger.info(f"download completed for file : {file_name}.")
 
 
 if __name__ == '__main__':

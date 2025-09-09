@@ -20,7 +20,7 @@
 #     print(f"error : {e}")
 import os
 
-from services.tools.my_logger import logger
-
-logger.info("uuu")
+a = ["a","b","c","d"]
+if "a" in a:
+    print("111")
 
