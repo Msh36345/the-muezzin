@@ -12,6 +12,7 @@ def get_data_from_mongo_db():
        logger.debug(f"file data : {file_data}")
     return data
 
+# Downloads a file from MongoDB by filename
 def download_file_from_mongo_db(folder_path,file_name):
     fs = GridFS(mongo_connection, collection=mongo_collection)
     data = mongo_connection[collection_files].find_one({"file_name": file_name})
@@ -19,9 +20,3 @@ def download_file_from_mongo_db(folder_path,file_name):
     with open(f"{folder_path}/{file_name}", 'wb') as output:
         output.write(out_data)
     logger.info(f"download completed for file : {file_name}.")
-
-
-if __name__ == '__main__':
-    data_list = get_data_from_mongo_db()
-    download_file_from_mongo_db('download (9).wav')
-

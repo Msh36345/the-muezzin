@@ -1,7 +1,7 @@
 import speech_recognition as sr
 from services.tools.my_logger import logger
 
-
+# Transcribes audio files
 def get_file_transcription(file_path_to_get_file_transcription):
     r = sr.Recognizer()
     file_path = file_path_to_get_file_transcription

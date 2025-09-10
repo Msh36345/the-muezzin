@@ -1,11 +1,9 @@
-import os
 from services.process_files.process_files import get_list_with_all_files_metadata
+from services.process_files.config import FOLDER_PATH,METADATA_TOPIC
 from services.tools.kafka_producer import publish_message,get_producer_config
 from services.tools.my_logger import logger
 
-FOLDER_PATH = os.getenv("FOLDER_PATH", "podcasts")
-METADATA_TOPIC = os.getenv("METADATA_TOPIC","metadata")
-
+# Create a list of all metadata and publish it in kafka
 def run_process():
     logger.info("---start process files---")
     producer = get_producer_config()

@@ -1,10 +1,8 @@
 import json
-import os
 from kafka import KafkaConsumer
 from services.tools.my_logger import logger
+from services.tools.config import KAFKA_SERVERS
 
-
-KAFKA_SERVERS = os.environ.get("KAFKA_SERVERS", 'localhost:9092')
 
 # This makes a Kafka consumer.
 def get_consumer_events(topic):
@@ -15,6 +13,7 @@ def get_consumer_events(topic):
                              consumer_timeout_ms=10000)
     return consumer
 
+# This gets the message from Kafka.
 def consumer_with_auto_commit(topic):
     message_value = ""
     messages = get_consumer_events(topic)

@@ -1,10 +1,8 @@
 import json
-import os
 from kafka import KafkaProducer
 from services.tools.my_logger import logger
+from services.tools.config import KAFKA_SERVERS
 
-
-KAFKA_SERVERS = os.environ.get("KAFKA_SERVERS", 'localhost:9092')
 
 # This makes a Kafka producer.
 def get_producer_config():
@@ -15,7 +13,7 @@ def get_producer_config():
     return producer
 
 
-# This gets the message from Kafka.
+# This publishes the message to Kafka.
 def publish_message(producer,topic,message):
     logger.info(f"topic {topic} start sending.")
     producer.send(topic, message)

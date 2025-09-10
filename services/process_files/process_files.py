@@ -5,7 +5,7 @@ from services.tools.my_logger import logger
 # Returns a list of all files in a folder.
 # Gets the folder path from the home path location.
 def get_list_of_files_path_from_folder(folder_path_from_home):
-    podcasts_folder = Path.home() / folder_path_from_home
+    podcasts_folder = folder_path_from_home
     list_of_files_path = []
     if podcasts_folder.exists():
         logger.info(f"Folder path is : {podcasts_folder}.")
@@ -14,7 +14,7 @@ def get_list_of_files_path_from_folder(folder_path_from_home):
         logger.info(f"Total files in folder : {len(list_of_files_path)}.")
         return list_of_files_path
     else:
-        logger.info("Folder path does not exist.")
+        logger.info(f"Folder path : '{podcasts_folder}' does not exist.")
         return list_of_files_path
 
 # Returns a list of json's with all the metadata of all the files

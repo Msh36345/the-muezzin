@@ -1,10 +1,7 @@
-import os
 import time
 from elasticsearch import  Elasticsearch
 from services.tools.my_logger import logger
-
-
-ES_HOST = os.environ.get("ES_HOST", "http://localhost:9200/")
+from services.tools.config import ES_HOST
 
 # This class talks to Elasticsearch
 class ElasticDAL:

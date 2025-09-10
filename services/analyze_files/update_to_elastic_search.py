@@ -1,9 +1,8 @@
-import os
+from services.upload_files.config import INDEX_NAME
 from services.tools.elastic_search import es_instance as es
 from services.tools.my_logger import logger
 
-INDEX_NAME = os.environ.get("INDEX_NAME", "the_muezzin")
-
+# Updating metadata for Elasticsearch
 def update_transcription_to_elastic_search(file_data):
     query_to_match = {
         "match": {

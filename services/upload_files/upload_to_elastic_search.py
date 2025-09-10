@@ -1,10 +1,8 @@
-import os
+from services.upload_files.config import INDEX_NAME
 from services.tools.elastic_search import es_instance as es
 from services.tools.my_logger import logger
 
-INDEX_NAME = os.environ.get("INDEX_NAME", "the_muezzin")
-
-
+# Create mapping
 mapping = {
     "mappings": {
         "properties": {
@@ -31,7 +29,7 @@ def reset_index():
     es.indices.create(index=INDEX_NAME, body=mapping)
     logger.info(f"---Index '{INDEX_NAME}' created with mapping.---\n")
 
-# This function loads datadata from  list path files to Elasticsearch
+# This function loads metadata from list to Elasticsearch
 def load_data_to_elastic(list_white_files_metadata):
     inserted = 0
     for file_metadata in list_white_files_metadata:
