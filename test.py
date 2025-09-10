@@ -22,28 +22,47 @@ import os
 
 from typing import Iterator
 
-def memory_efficient_word_generator(text_file: str) -> Iterator[str]:
-    word = ''
-    with open(text_file) as text:
-        while True:
-            character = text.read(1)
-            if not character:
-                return
-            if character.isspace():
-                yield word.lower()
-                word = ''
-            else:
-                word += character
+# def memory_efficient_word_generator(text_file: str) -> Iterator[str]:
+#     word = ''
+#     with open(text_file) as text:
+#         while True:
+#             character = text.read(1)
+#             if not character:
+#                 return
+#             if character.isspace():
+#                 yield word.lower()
+#                 word = ''
+#             else:
+#                 word += character
+#
+#
+# def pair_generator(text_file):
+#     previous_word = ''
+#     for word in memory_efficient_word_generator(text_file):
+#         if previous_word and word:
+#             yield f'{previous_word}-{word}'
+#         previous_word = word or previous_word
+#
+#
+# for pair in pair_generator('filename.txt'):
+#     print(pair)
 
-
-def pair_generator(text_file):
-    previous_word = ''
-    for word in memory_efficient_word_generator(text_file):
-        if previous_word and word:
-            yield f'{previous_word}-{word}'
-        previous_word = word or previous_word
-
-
-for pair in pair_generator('filename.txt'):
-    print(pair)
-
+# import nltk
+# from nltk.corpus import stopwords
+# from nltk.tokenize import word_tokenize
+#
+# nltk.download('stopwords')
+# nltk.download('punkt')
+#
+# # Sample text
+# text = "This is a sample sentence showing stopword removal."
+#
+# # Get English stopwords and tokenize
+# stop_words = set(stopwords.words('english'))
+# tokens = word_tokenize(text.lower())
+#
+# # Remove stopwords
+# filtered_tokens = [word for word in tokens if word not in stop_words]
+#
+# print("Original:", tokens)
+# print("Filtered:", filtered_tokens)

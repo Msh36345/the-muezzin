@@ -32,11 +32,7 @@ def get_json_with_file_metadata(file_path):
         "file_type": file_path.suffix[1:],
         "file_size": file_path.stat().st_size,
         "file_create_time": datetime.fromtimestamp(file_path.stat().st_birthtime).strftime('%Y-%m-%d %H:%M'),
-        "file_path": str(file_path),
-        "transcription": "",
-        "bds_percent": "",
-        "is_bds": "",
-        "bds_threat_level": ""
+        "file_path": str(file_path)
     }
     logger.debug(file_metadata)
     return file_metadata
